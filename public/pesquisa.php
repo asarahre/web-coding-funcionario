@@ -12,18 +12,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (
         !empty($pesquisa)
     ) {
-        $sql = "select * FROM pessoa
+        $sql = "select * FROM funcionario
         where 
         nome like '%$pesquisa%' or 
-        sobre_nome like '%$pesquisa%' or
-        cpf like '%$pesquisa%'";
+        sobrenome like '%$pesquisa%' or
+        cargo like '%$pesquisa%'";
+
         $dados = $pdo->query($sql);
-        $clientes = $dados->fetchAll(PDO::FETCH_OBJ);
-        foreach ($clientes as $key => $value) {
+
+        $funcionarios = $dados->fetchAll(PDO::FETCH_OBJ);
+        
+        foreach ($funcionarios as $key => $value) {
             echo "<tr><td>$value->id</td>" .
                 "<td>$value->nome</td>" .
-                "<td>$value->sobre_nome</td>" .
-                "<td>$value->cpf</td></tr>";
+                "<td>$value->sobrenome</td>" .
+                "<td>$value->cargo</td></tr>";
         }
     } else {
         echo "Por favor informe o que deseja pesquisa";
